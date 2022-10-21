@@ -1,0 +1,29 @@
+{
+    "categories" :[
+        {
+            "name": "Makanan",
+            "id": 1
+        },
+        {
+            "name": "Minuman",
+            "id": 2
+        },
+        {
+            "name": "Snack",
+            "id": 3
+        },
+        {
+            "name": "Makanan Ringan",
+            "id": 4
+        },
+        {
+            "name": "Makanan Berat",
+            "id": 5
+        }
+    ],
+    
+    "tags" :[
+        
+    ]
+    
+}
