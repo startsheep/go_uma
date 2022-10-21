@@ -12,7 +12,7 @@ void main() async {
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Go Uma",
-      initialRoute: Routes.AUTH,
+      initialRoute: SpUtil.getBool('isAuth')! ? Routes.AUTH : Routes.CORE,
       getPages: AppPages.routes,
     ),
   );
