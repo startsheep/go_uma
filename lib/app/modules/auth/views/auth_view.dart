@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:go_uma/app/routes/app_pages.dart';
+import 'package:go_uma/app/widgets/reuse_text_field.dart';
 
 import '../controllers/auth_controller.dart';
 
@@ -54,7 +55,7 @@ class AuthView extends GetView<AuthController> {
                         ),
                       ),
                       TextSpan(
-                        text: 'GO UMKM MAsa Depan',
+                        text: ' GO UMKM Masa Depan',
                         style: TextStyle(
                           color: Color.fromARGB(255, 111, 111, 111),
                           fontSize: 20,
@@ -75,85 +76,61 @@ class AuthView extends GetView<AuthController> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-
+                // Obx(() => Text(controller.phoneController.value.text)),
                 // Icon(Icons.image, size: 333, color: Colors.white),
                 Form(
                   key: _form,
                   child: Column(
                     children: [
-                      TextFormField(
-                        keyboardType: TextInputType.emailAddress,
-                        style:
-                            TextStyle(color: Color.fromARGB(255, 77, 73, 73)),
-                        // controller: user,
-                        decoration: InputDecoration(
-                          enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                            color: Color.fromARGB(255, 67, 62, 62),
-                            width: 2,
-                          )),
-                          focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                            color: Color.fromARGB(255, 75, 69, 69),
-                            width: 2,
-                          )),
-                          focusColor: Color.fromARGB(255, 63, 59, 59),
-                          hintText: "Email",
-                          labelText: 'Email',
-                          labelStyle: TextStyle(
-                            color: Color.fromARGB(255, 74, 71, 71),
-                          ),
-                          prefixIcon: Icon(Icons.person,
-                              color: Color.fromARGB(255, 64, 60, 60)),
+                      ReuseTextFiled(
+                        hintText: "Telepon",
+                        keyboardType: TextInputType.phone,
+                        controller: controller.phoneController,
+                        prefixIcon: Icon(
+                          Icons.phone,
+                          color: Color.fromARGB(255, 134, 82, 255),
                         ),
-                        validator: (text) {
-                          if (text == null || text.isEmpty) {
-                            return 'Email cannot be empty';
+                        validator: (p0) {
+                          if (p0!.isEmpty || p0.length < 1) {
+                            return "Telepon tidak boleh kosong";
                           }
+                          return null;
                         },
                       ),
                       SizedBox(
                         height: 20,
                       ),
-                      TextFormField(
-                        style:
-                            TextStyle(color: Color.fromARGB(255, 64, 60, 60)),
-                        validator: (text) {
-                          if (text == null || text.isEmpty) {
-                            return 'password cannot be empty';
-                          } else if (text.length < 8) {
-                            return "Enter valid password of more then 8 characters!";
-                          }
-                        },
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                            color: Color.fromARGB(255, 64, 60, 60),
-                            width: 2,
-                          )),
-                          focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                            color: Color.fromARGB(255, 64, 60, 60),
-                            width: 2,
-                          )),
-                          focusColor: Color.fromARGB(255, 64, 60, 60),
+                      Obx(() {
+                        return ReuseTextFiled(
                           hintText: "Password",
-                          labelText: 'Password',
-                          labelStyle: TextStyle(
-                            color: Color.fromARGB(255, 64, 60, 60),
+                          controller: controller.passwordController,
+                          obscureText: controller.isPasswordVisible.value,
+                          prefixIcon: Icon(
+                            Icons.lock,
+                            color: Color.fromARGB(255, 134, 82, 255),
                           ),
-                          prefixIcon: Icon(Icons.lock,
-                              color: Color.fromARGB(255, 64, 60, 60)),
+                          validator: (p0) {
+                            if (p0!.isEmpty || p0.length < 1) {
+                              return "Password tidak boleh kosong";
+                            } else if (p0.length < 8) {
+                              return "Password tidak boleh kurang dari 6 karakter";
+                            }
+                            return null;
+                          },
                           suffixIcon: IconButton(
                             icon: Icon(
-                              Icons.visibility,
-                              color: Color.fromARGB(255, 64, 60, 60),
+                              controller.isPasswordVisible.value
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                              color: Color.fromARGB(255, 134, 82, 255),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              controller.isPasswordVisible.value =
+                                  !controller.isPasswordVisible.value;
+                            },
                           ),
-                        ),
-                      ),
+                        );
+                      }),
                       SizedBox(
                         height: 20,
                       ),
