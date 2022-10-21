@@ -8,6 +8,9 @@ environment:
 dependencies: 
   cupertino_icons: ^1.0.2
   get: 4.6.5
+  sp_util: 2.0.3
+  carousel_slider: 4.1.1
+  google_maps_flutter: 2.2.1
   flutter: 
     sdk: flutter
 
