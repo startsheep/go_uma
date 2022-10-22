@@ -49,7 +49,7 @@ class AuthView extends GetView<AuthController> {
                       TextSpan(
                         text: 'GoUma\n',
                         style: TextStyle(
-                          color: Color.fromARGB(255, 159, 94, 238),
+                          color: Color.fromARGB(255, 116, 65, 255),
                           fontSize: 32,
                           fontWeight: FontWeight.bold,
                         ),

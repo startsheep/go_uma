@@ -7,6 +7,8 @@ import '../modules/core/bindings/core_binding.dart';
 import '../modules/core/views/core_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/maps/bindings/maps_binding.dart';
+import '../modules/maps/views/maps_view.dart';
 import '../modules/product/bindings/product_binding.dart';
 import '../modules/product/views/product_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
@@ -49,6 +51,11 @@ class AppPages {
       name: _Paths.PROFILE,
       page: () => const ProfileView(),
       binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.MAPS,
+      page: () => const MapsView(),
+      binding: MapsBinding(),
     ),
   ];
 }

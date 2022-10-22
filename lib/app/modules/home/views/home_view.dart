@@ -1,18 +1,18 @@
 // ignore_for_file: must_be_immutable
 
-import 'dart:math';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-
+import 'package:go_uma/app/modules/home/views/category_widget.dart';
+import 'package:go_uma/app/widgets/card_content_product.dart';
+import 'package:go_uma/app/widgets/text_heading.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 255, 254, 254),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -125,129 +125,59 @@ class HomeView extends GetView<HomeController> {
               ),
               SizedBox(
                 height: Get.height / 7,
-                child: Obx((() => GridView.builder(
-                      scrollDirection: Axis.horizontal,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 1,
-                        childAspectRatio: 1,
-                      ),
-                      itemCount: controller.categories.length,
-                      itemBuilder: (context, index) {
-                        return CardContentProduct(
-                            title: controller.categories[index]['name']);
-                      },
-                    ))),
-              )
+                child: Obx(
+                  (() => GridView.builder(
+                        scrollDirection: Axis.horizontal,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 1,
+                          childAspectRatio: 1,
+                        ),
+                        itemCount: controller.categories.length,
+                        itemBuilder: (context, index) {
+                          return CardContentProduct(
+                            outerColor: Color.fromARGB(255, 252, 252, 252),
+                            innerColor: Color.fromARGB(255, 246, 246, 246),
+                            color: Colors.black,
+                            title: controller.categories[index]['name'],
+                          );
+                        },
+                      )),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                child: HeadingWidget(
+                  label: 'Jajanan Kaki Lima ',
+                ),
+              ),
+              SizedBox(
+                height: Get.height / 7,
+                child: Obx(
+                  (() => GridView.builder(
+                        scrollDirection: Axis.horizontal,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 1,
+                          childAspectRatio: 1,
+                        ),
+                        itemCount: controller.categories.length,
+                        itemBuilder: (context, index) {
+                          return CardContentProduct(
+                              outerColor: Color.fromARGB(255, 252, 252, 252),
+                              innerColor: Color.fromARGB(255, 246, 246, 246),
+                              color: Colors.black,
+                              title: controller.categories[index]['name']);
+                        },
+                      )),
+                ),
+              ),
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class HeadingWidget extends StatelessWidget {
-  String label;
-  Color? color = Color.fromARGB(255, 97, 97, 97);
-  HeadingWidget({
-    Key? key,
-    required this.label,
-    this.color,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      label,
-      style: TextStyle(
-        fontSize: 20,
-        fontWeight: FontWeight.bold,
-        color: color,
-      ),
-    );
-  }
-}
-
-class CategoryWidget extends StatelessWidget {
-  const CategoryWidget({
-    Key? key,
-    required this.controller,
-  }) : super(key: key);
-
-  final HomeController controller;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 250,
-      child: GridView.builder(
-        scrollDirection: Axis.horizontal,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 1,
-        ),
-        itemCount: controller.categories.length,
-        itemBuilder: (context, index) {
-          return CardContentProduct(
-            title: controller.categories[index]['name'],
-          );
-        },
-      ),
-    );
-  }
-}
-
-class CardContentProduct extends StatelessWidget {
-  String? title;
-  CardContentProduct({Key? key, required this.title}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      // width: 200,
-      // height: 200,
-      margin: const EdgeInsets.all(10),
-      padding: const EdgeInsets.all(5),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        color: Color.fromARGB(255, 124, 106, 255),
-        boxShadow: [
-          BoxShadow(
-            color: const Color.fromARGB(255, 99, 97, 97).withOpacity(0.5),
-            spreadRadius: 2,
-            blurRadius: 1,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: const Color.fromARGB(96, 0, 0, 0),
-                image: DecorationImage(
-                  image: NetworkImage(
-                      'https://picsum.photos/200/300?food=${Random().nextInt(100)}'),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-          ),
-          Text(
-            title!,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ],
       ),
     );
   }
