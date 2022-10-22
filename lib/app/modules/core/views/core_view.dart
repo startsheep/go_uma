@@ -18,17 +18,23 @@ class CoreView extends GetView<CoreController> {
             type: BottomNavigationBarType.fixed,
             onTap: (value) => controller.changePage(value),
             currentIndex: controller.currentPage.value,
+            showUnselectedLabels: false,
+            selectedItemColor: Color.fromARGB(255, 142, 67, 255),
+            selectedFontSize: 16,
+            unselectedItemColor: Colors.grey,
             // backgroundColor: Color.fromARGB(255, 215, 215, 215),
             items: const [
               BottomNavigationBarItem(
                 icon: Icon(Icons.home_outlined),
-                activeIcon: Icon(Icons.home),
-                label: 'Home',
+                activeIcon: Icon(
+                  Icons.home,
+                ),
+                label: 'Beranda',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.add_a_photo_outlined),
-                activeIcon: Icon(Icons.add_a_photo_rounded),
-                label: 'Posting',
+                icon: Icon(Icons.location_on_outlined),
+                activeIcon: Icon(Icons.location_on),
+                label: 'Sekitar',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.person_outline_outlined),

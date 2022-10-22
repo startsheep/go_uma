@@ -5,14 +5,13 @@ import 'app/routes/app_pages.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await SpUtil.getInstance();
-  // await SpUtil.getInstance();
-  Get.putAsync(() => SpUtil.getInstance());
+
+  await Get.putAsync(() => SpUtil.getInstance());
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Go Uma",
-      initialRoute: SpUtil.getBool('isAuth')! ? Routes.AUTH : Routes.CORE,
+      initialRoute: SpUtil.getBool('isAuth')! ? Routes.CORE : Routes.AUTH,
       getPages: AppPages.routes,
     ),
   );
