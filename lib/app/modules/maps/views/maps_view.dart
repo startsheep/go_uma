@@ -24,7 +24,7 @@ class MapsView extends GetView<MapsController> {
             zoomGesturesEnabled: true,
             onMapCreated: (GoogleMapController controllers) {
               controller.mapController = controllers;
-              controller.addMarker('Ahmad', controller.currentLocation.value);
+              // controller.addMarker('Ahmad', controller.currentLocation.value);
 
               // controller.setMapStyle(controller.mapStyle);
             },

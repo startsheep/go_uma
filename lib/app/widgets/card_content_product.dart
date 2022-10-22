@@ -3,9 +3,11 @@ import 'package:get/get.dart';
 
 class CardContentProduct extends StatelessWidget {
   String? title;
+  String? image;
   Color? outerColor;
   Color? innerColor;
   Color? color;
+
   Function? onTap;
   CardContentProduct({
     Key? key,
@@ -14,6 +16,7 @@ class CardContentProduct extends StatelessWidget {
     this.innerColor,
     this.color,
     this.onTap,
+    this.image,
   }) : super(key: key);
 
   @override
@@ -46,7 +49,8 @@ class CardContentProduct extends StatelessWidget {
                   color: innerColor ?? Color.fromARGB(121, 221, 221, 221),
                   image: DecorationImage(
                     image: NetworkImage(
-                      'https://img.icons8.com/material-outlined/344/product.png',
+                      image ??
+                          'https://img.icons8.com/material-outlined/344/product.png',
                     ),
                     scale: 10,
                   ),
