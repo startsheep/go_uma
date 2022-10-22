@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_uma/app/modules/home/views/category_widget.dart';
+import 'package:go_uma/app/routes/app_pages.dart';
 import 'package:go_uma/app/widgets/card_content_product.dart';
 import 'package:go_uma/app/widgets/text_heading.dart';
 import '../controllers/home_controller.dart';
@@ -13,47 +14,52 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 255, 254, 254),
+      appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 255, 254, 254),
+        elevation: 0,
+        title: Text(
+          'Go Uma',
+          style: TextStyle(
+            color: Color.fromARGB(255, 0, 4, 8),
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              showCart();
+            },
+            icon: Icon(
+              Icons.shopping_basket_outlined,
+              size: 30,
+              color: Color.fromARGB(255, 110, 32, 255),
+            ),
+          ),
+          // inkwell with avatar
+          InkWell(
+            onTap: () {},
+            child: Container(
+              margin: EdgeInsets.only(right: 10),
+              child: CircleAvatar(
+                radius: 20,
+                backgroundImage:
+                    NetworkImage('https://placeimg.com/640/480/any'),
+              ),
+            ),
+          ),
+        ],
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             // mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              //// create dropdown from categories
-              Container(
-                width: Get.width,
-                height: Get.height / 10,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                // color: Color.fromARGB(255, 184, 184, 184),
-                child: Column(
-                  children: const [
-                    TextField(
-                      decoration: InputDecoration(
-                        focusColor: Colors.amberAccent,
-                        fillColor: Colors.amberAccent,
-                        isDense: true,
-                        border: OutlineInputBorder(
-                          gapPadding: 2,
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(10),
-                          ),
-                        ),
-                        hintText: 'Search',
-                        prefixIcon: Icon(
-                          Icons.search,
-                          color: Colors.black,
-                        ),
-                        labelText: 'Search',
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              // make grid for categories with scroll direction horizontal and have 2 item in row
+              //// create dropdown from categorie
+              SizedBox(
+                height: 15,
+              ), // make grid for categories with scroll direction horizontal and have 2 item in row
               CarouselSlider(
                 options: CarouselOptions(
                   aspectRatio: 3 / 1,
@@ -136,6 +142,9 @@ class HomeView extends GetView<HomeController> {
                         itemCount: controller.categories.length,
                         itemBuilder: (context, index) {
                           return CardContentProduct(
+                            onTap: () {
+                              Get.toNamed(Routes.PRODUCT);
+                            },
                             outerColor: Color.fromARGB(255, 252, 252, 252),
                             innerColor: Color.fromARGB(255, 246, 246, 246),
                             color: Colors.black,
@@ -167,16 +176,57 @@ class HomeView extends GetView<HomeController> {
                         itemCount: controller.categories.length,
                         itemBuilder: (context, index) {
                           return CardContentProduct(
-                              outerColor: Color.fromARGB(255, 252, 252, 252),
-                              innerColor: Color.fromARGB(255, 246, 246, 246),
-                              color: Colors.black,
-                              title: controller.categories[index]['name']);
+                            outerColor: Color.fromARGB(255, 252, 252, 252),
+                            innerColor: Color.fromARGB(255, 246, 246, 246),
+                            color: Colors.black,
+                            image:
+                                'https://images.spoonacular.com/file/wximages/423186-636x393.png',
+                            title: controller.categories[index]['name'],
+                          );
                         },
                       )),
                 ),
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  showCart() {
+    Get.bottomSheet(
+      Container(
+        height: Get.height,
+        color: Colors.white,
+        child: Column(
+          children: [
+            // make title keranjang
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Keranjang',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  Text(
+                    'Edit',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
